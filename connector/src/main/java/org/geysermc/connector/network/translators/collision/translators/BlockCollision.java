@@ -114,24 +114,33 @@ public class BlockCollision {
                         b.getMiddleY(),
                         b.getMiddleZ());
 
+                Vector3d downFacePos = Vector3d.from(b.getMiddleX(),
+                        b.getMiddleY() - (b.getSizeY() / 2),
+                        b.getMiddleZ());
+
                 double translateDistance = northFacePos.getZ() - relativePlayerPosition.getZ() - (playerCollision.getSizeZ() / 2);
-                if (Math.abs(translateDistance) < CollisionManager.COLLISION_TOLERANCE * 1.1) {
+                if (Math.abs(translateDistance) < 0.00015) {
                     playerCollision.translate(0, 0, translateDistance);
                 }
                 
                 translateDistance = southFacePos.getZ() - relativePlayerPosition.getZ() + (playerCollision.getSizeZ() / 2);
-                if (Math.abs(translateDistance) < CollisionManager.COLLISION_TOLERANCE * 1.1) {
+                if (Math.abs(translateDistance) < 0.00015) {
                     playerCollision.translate(0, 0, translateDistance);
                 }
 
                 translateDistance = eastFacePos.getX() - relativePlayerPosition.getX() + (playerCollision.getSizeX() / 2);
-                if (Math.abs(translateDistance) < CollisionManager.COLLISION_TOLERANCE * 1.1) {
+                if (Math.abs(translateDistance) < 0.00015) {
                     playerCollision.translate(translateDistance, 0, 0);
                 }
 
                 translateDistance = westFacePos.getX() - relativePlayerPosition.getX() - (playerCollision.getSizeX() / 2);
-                if (Math.abs(translateDistance) < CollisionManager.COLLISION_TOLERANCE * 1.1) {
+                if (Math.abs(translateDistance) < 0.00015) {
                     playerCollision.translate(translateDistance, 0, 0);
+                }
+
+                translateDistance = downFacePos.getY() - relativePlayerPosition.getY() - (playerCollision.getSizeY());
+                if (Math.abs(translateDistance) < 0.00015) {
+                    playerCollision.translate(0, translateDistance, 0);
                 }
             }
 
